@@ -2,6 +2,8 @@ package vitorlucas.desafiozup.resources;
 
 import java.net.URI;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,7 +31,7 @@ public class EnderecoResource {
 	}
 	
 	@PostMapping
-	public ResponseEntity<EnderecoDTO> insert(@RequestBody  EnderecoDTO dto){
+	public ResponseEntity<EnderecoDTO> insert(@RequestBody @Valid  EnderecoDTO dto){
 		dto = service.insert(dto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri();
 		return ResponseEntity.created(uri).body(dto);

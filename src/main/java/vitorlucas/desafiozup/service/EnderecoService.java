@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 import vitorlucas.desafiozup.dto.EnderecoDTO;
 import vitorlucas.desafiozup.entities.Endereco;
 import vitorlucas.desafiozup.entities.Usuario;
-import vitorlucas.desafiozup.feignclients.ViaCepFeignClient;
 import vitorlucas.desafiozup.repository.EnderecoRepository;
 import vitorlucas.desafiozup.repository.UsuarioRepository;
 import vitorlucas.desafiozup.service.exceptions.ResourceNotFoundException;
@@ -24,9 +23,6 @@ public class EnderecoService {
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 	
-	@Autowired
-	private ViaCepFeignClient viaCepFeignClient;
-	
 	@Transactional(readOnly = true)
 	public EnderecoDTO findById(Long id) {
 		Optional <Endereco> end = repository.findById(id);
@@ -36,7 +32,12 @@ public class EnderecoService {
 	
 	@Transactional
 	public EnderecoDTO insert(EnderecoDTO dto) {
-		Endereco entity = viaCepFeignClient.findyEnderecoByCep(dto.getCep());
+		Endereco entity = new Endereco();
+		entity.setLogradouro(dto.getLogradouro());
+		entity.setBairro(dto.getBairro());
+		entity.setLocalidade(dto.getLocalidade());
+		entity.setUf(dto.getUf());
+		entity.setCep(dto.getCep());
 		entity.setNumero(dto.getNumero());
 		entity.setComplemento(dto.getComplemento());
 
