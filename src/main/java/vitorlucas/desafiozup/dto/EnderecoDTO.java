@@ -5,6 +5,8 @@ import java.io.Serializable;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;
 
+import org.hibernate.validator.constraints.Length;
+
 import vitorlucas.desafiozup.entities.Endereco;
 
 
@@ -13,34 +15,40 @@ public class EnderecoDTO implements Serializable{
 	
 	private Long id;
 	
+	@Length(min = 5, max = 60, message = "Quantidade de caracteres invalida")
 	@NotBlank(message = "Campo obrigatório")
 	private String logradouro;
 	
 	@Positive(message = "Numero deve ser positivo")
 	private Integer numero;
+	
+	@Length(min = 2, max = 60, message = "Quantidade de caracteres invalida")
 	private String complemento;
 	
+	@Length(min = 2, max = 60, message = "Quantidade de caracteres invalida")
 	@NotBlank(message = "Campo obrigatório")
 	private String bairro;
 	
+	@Length(min = 2, max = 50, message = "Quantidade de caracteres invalida")
 	@NotBlank(message = "Campo obrigatório")
 	private String localidade;
 	
+	@Length(min = 2, max = 2, message = "Quantidade de caracteres invalida")
 	@NotBlank(message = "Campo obrigatório")
 	private String uf;
 	
+	@Length(min = 8 , max = 8, message = "Quantidade de caracteres invalida")
 	@NotBlank(message = "Campo obrigatório")
 	private String cep;
 	
-	private Long idUsuario;
+	private String cpfUsuario;
 	
 	public EnderecoDTO() {
 	}
 
 	public EnderecoDTO(Long id, String logradouro, Integer numero, String complemento, String bairro, String localidade,
-			String uf, String cep, Long idUsuario) {
-		super();
-		this.id = id;
+			String uf, String cep,  String cpfUsuario) {
+		this.id = id; 
 		this.logradouro = logradouro;
 		this.numero = numero;
 		this.complemento = complemento;
@@ -48,7 +56,7 @@ public class EnderecoDTO implements Serializable{
 		this.localidade = localidade;
 		this.uf = uf;
 		this.cep = cep;
-		this.idUsuario = idUsuario;
+		this.cpfUsuario = cpfUsuario;
 	}
 	
 	public EnderecoDTO(Endereco entity) {
@@ -60,7 +68,7 @@ public class EnderecoDTO implements Serializable{
 		localidade = entity.getLocalidade();
 		uf = entity.getUf();
 		cep = entity.getCep();
-		idUsuario = entity.getUsuario().getId();
+		cpfUsuario = entity.getUsuario().getCpf();
 	}
 	
 	public Long getId() {
@@ -127,11 +135,11 @@ public class EnderecoDTO implements Serializable{
 		this.cep = cep;
 	}
 
-	public Long getIdUsuario() {
-		return idUsuario;
+	public String getCpfUsuario() {
+		return cpfUsuario;
 	}
 
-	public void setIdUsuario(Long idUsuario) {
-		this.idUsuario = idUsuario;
+	public void setCpfUsuario(String cpfUsuario) {
+		this.cpfUsuario = cpfUsuario;
 	}
 }

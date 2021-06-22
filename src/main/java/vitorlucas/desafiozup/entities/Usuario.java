@@ -1,6 +1,6 @@
 package vitorlucas.desafiozup.entities;
 
-import java.time.Instant;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +19,8 @@ public class Usuario {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@Column(nullable = false)
 	private String nome;
 	
 	@Column(unique = true)
@@ -27,7 +29,8 @@ public class Usuario {
 	@Column(unique = true)
 	private String email;
 	
-	private Instant dataNascimento;
+	@Column(nullable = false)
+	private LocalDate dataNascimento;
 	
 	@OneToMany(mappedBy = "usuario")
 	private List<Endereco> enderecos = new ArrayList<>();
@@ -35,7 +38,7 @@ public class Usuario {
 	public Usuario() {
 	}
 
-	public Usuario(Long id, String nome, String cpf, String email, Instant dataNascimento) {
+	public Usuario(Long id, String nome, String cpf, String email, LocalDate dataNascimento) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -80,14 +83,16 @@ public class Usuario {
 		this.email = email;
 	}
 
-
-	public Instant getDataNascimento() {
+	public LocalDate getDataNascimento() {
 		return dataNascimento;
 	}
 
-
-	public void setDataNascimento(Instant dataNascimento) {
+	public void setDataNascimento(LocalDate dataNascimento) {
 		this.dataNascimento = dataNascimento;
+	}
+
+	public void setEnderecos(List<Endereco> enderecos) {
+		this.enderecos = enderecos;
 	}
 
 	public List<Endereco> getEnderecos() {

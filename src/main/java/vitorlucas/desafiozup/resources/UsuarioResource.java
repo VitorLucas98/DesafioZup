@@ -33,7 +33,7 @@ public class UsuarioResource {
 	@PostMapping
 	public ResponseEntity<UsuarioDTO> insert(@RequestBody @Valid UsuarioDTO dto){
 		dto = service.insert(dto);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getCpf()).toUri();
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{cpf}").buildAndExpand(dto.getCpf()).toUri();
 		return ResponseEntity.created(uri).body(dto);
 	}
 }

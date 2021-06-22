@@ -1,7 +1,7 @@
 package vitorlucas.desafiozup.dto;
 
 import java.io.Serializable;
-import java.time.Instant;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,28 +17,25 @@ import vitorlucas.desafiozup.entities.Usuario;
 public class UsuarioDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
-	private Long id;
-	
 	@NotBlank(message = "Campo obrigatório")
 	private String nome;
 	
 	@CPF(message = "CPF invalido")
 	private String cpf;
 	
+	@NotBlank(message = "Campo obrigatório")
 	@Email(message = "Email invalido")
 	private String email;
 	
 	@Past(message = "A data deve ser  do passado")
-	private Instant dataNascimento;
+	private LocalDate dataNascimento;
 	
 	private List<EnderecoDTO> enderecos = new ArrayList<>();
 
 	public UsuarioDTO() {
 	}
 
-	public UsuarioDTO(Long id, String nome, String cpf, String email, Instant dataNascimento) {
-		super();
-		this.id = id;
+	public UsuarioDTO(String nome, String cpf, String email, LocalDate dataNascimento) {
 		this.nome = nome;
 		this.cpf = cpf;
 		this.email = email;
@@ -46,7 +43,6 @@ public class UsuarioDTO implements Serializable{
 	}
 	
 	public UsuarioDTO(Usuario entity) {
-		id = entity.getId();
 		nome = entity.getNome();
 		cpf = entity.getCpf();
 		email = entity.getEmail();
@@ -56,14 +52,6 @@ public class UsuarioDTO implements Serializable{
 	public UsuarioDTO(Usuario entity, List<Endereco> enderecos) {
 		this(entity);
 		enderecos.forEach(x -> this.enderecos.add(new EnderecoDTO(x)));
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public String getNome() {
@@ -90,11 +78,11 @@ public class UsuarioDTO implements Serializable{
 		this.email = email;
 	}
 
-	public Instant getDataNascimento() {
+	public LocalDate getDataNascimento() {
 		return dataNascimento;
 	}
 
-	public void setDataNascimento(Instant dataNascimento) {
+	public void setDataNascimento(LocalDate dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 

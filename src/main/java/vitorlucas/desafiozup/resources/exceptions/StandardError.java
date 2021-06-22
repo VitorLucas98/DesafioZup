@@ -1,12 +1,12 @@
 package vitorlucas.desafiozup.resources.exceptions;
 
 import java.io.Serializable;
-import java.time.Instant;
+import java.time.LocalDate;
 
 public class StandardError implements Serializable{
 	private static final long serialVersionUID = 1L;
 
-	private Instant timestamp;
+	private LocalDate timestamp;
     private Integer status;
     private String error;
     private String message;
@@ -15,7 +15,7 @@ public class StandardError implements Serializable{
     public StandardError() {
     }
 
-	public StandardError(Instant timestamp, Integer status, String error, String message, String path) {
+	public StandardError(LocalDate timestamp, Integer status, String error, String message, String path) {
 		super();
 		this.timestamp = timestamp;
 		this.status = status;
@@ -24,11 +24,11 @@ public class StandardError implements Serializable{
 		this.path = path;
 	}
 
-	public Instant getTimestamp() {
+	public LocalDate getTimestamp() {
 		return timestamp;
 	}
 
-	public void setTimestamp(Instant timestamp) {
+	public void setTimestamp(LocalDate timestamp) {
 		this.timestamp = timestamp;
 	}
 

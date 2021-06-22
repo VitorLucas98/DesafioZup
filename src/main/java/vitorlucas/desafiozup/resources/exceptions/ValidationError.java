@@ -1,6 +1,6 @@
 package vitorlucas.desafiozup.resources.exceptions;
 
-import java.time.Instant;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +12,7 @@ public class ValidationError extends StandardError{
 	public ValidationError() {
 	}
 	
-	public ValidationError(Instant timestamp, Integer status, String error, String message, String path) {
+	public ValidationError(LocalDate timestamp, Integer status, String error, String message, String path) {
 		super(timestamp, status, error, message, path);
 	}
 
