@@ -78,7 +78,7 @@ public class EnderecoService {
 
 		Usuario usuario = usuarioRepository.findByCpf(dto.getCpfUsuario());
 		if (usuario == null) {
-			throw new ResourceNotFoundException("cpf não encontrado");
+			throw new ResourceNotFoundException("usuario não encontrado");
 		}
 		entity.setUsuario(usuario);
 	}

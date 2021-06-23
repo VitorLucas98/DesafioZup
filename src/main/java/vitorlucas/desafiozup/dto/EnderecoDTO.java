@@ -40,7 +40,8 @@ public class EnderecoDTO implements Serializable{
 	@Length(min = 8 , max = 8, message = "Quantidade de caracteres invalida")
 	@NotBlank(message = "Campo obrigatório")
 	private String cep;
-	
+
+	@NotBlank(message = "Campo obrigatório")
 	private String cpfUsuario;
 	
 	public EnderecoDTO() {

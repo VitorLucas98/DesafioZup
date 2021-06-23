@@ -23,7 +23,6 @@ public class UsuarioDTO implements Serializable{
 	@CPF(message = "CPF invalido")
 	private String cpf;
 	
-	@NotBlank(message = "Campo obrigatório")
 	@Email(message = "Email invalido")
 	private String email;
 	
