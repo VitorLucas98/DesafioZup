@@ -11,8 +11,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import vitorlucas.desafiozup.dto.EnderecoDTO;
+import vitorlucas.desafiozup.dto.EnderecoFeignClient;
 import vitorlucas.desafiozup.entities.Endereco;
 import vitorlucas.desafiozup.entities.Usuario;
+import vitorlucas.desafiozup.feignclients.ViaCepFeignClient;
 import vitorlucas.desafiozup.repository.EnderecoRepository;
 import vitorlucas.desafiozup.repository.UsuarioRepository;
 import vitorlucas.desafiozup.service.exceptions.DatabaseException;
@@ -26,6 +28,9 @@ public class EnderecoService {
 
 	@Autowired
 	private UsuarioRepository usuarioRepository;
+	
+	@Autowired
+	private ViaCepFeignClient viaCepFeignClient;
 
 	@Transactional(readOnly = true)
 	public Page<EnderecoDTO> findAllPaged(Pageable pageable){
@@ -38,6 +43,12 @@ public class EnderecoService {
 		Optional<Endereco> end = repository.findById(id);
 		Endereco endereco = end.orElseThrow(() -> new ResourceNotFoundException("Endereco não encontrado"));
 		return new EnderecoDTO(endereco);
+	}
+	
+	@Transactional(readOnly = true)
+	public EnderecoFeignClient findEnderecoByCep(String cep) {
+		EnderecoFeignClient end = viaCepFeignClient.findByCep(cep);
+		return end;
 	}
 
 	@Transactional

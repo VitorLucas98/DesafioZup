@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import vitorlucas.desafiozup.dto.EnderecoDTO;
+import vitorlucas.desafiozup.dto.EnderecoFeignClient;
 import vitorlucas.desafiozup.service.EnderecoService;
 
 @RestController
@@ -45,6 +46,12 @@ public class EnderecoResource {
 	public ResponseEntity<EnderecoDTO> findById(@PathVariable Long id){
 		EnderecoDTO dto = service.findById(id);
 		return ResponseEntity.ok(dto);
+	}
+	
+	@GetMapping(value = "/cep/{cep}")
+	public ResponseEntity<EnderecoFeignClient> findByCep(@PathVariable String cep){
+		EnderecoFeignClient end = service.findEnderecoByCep(cep);
+		return ResponseEntity.ok(end);
 	}
 	
 	@PostMapping
