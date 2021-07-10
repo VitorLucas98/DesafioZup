@@ -2,7 +2,6 @@ package vitorlucas.desafiozup.resources.exceptions;
 
 import java.time.LocalDate;
 
-import javax.persistence.PersistenceException;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.http.HttpStatus;
@@ -25,7 +24,7 @@ public class ResourceExceptionHandler {
 		return ResponseEntity.status(status).body(erro);
 	}
 	
-	@ExceptionHandler(PersistenceException .class)
+	/*@ExceptionHandler(PersistenceException .class)
 	public ResponseEntity<StandardError> constraintViolation(PersistenceException e, HttpServletRequest request){
 		HttpStatus status = HttpStatus.BAD_REQUEST;
 		StandardError erro = new StandardError(LocalDate.now(), status.value(),
@@ -33,7 +32,7 @@ public class ResourceExceptionHandler {
 		return ResponseEntity.status(status).body(erro);
 	
 	}
-	
+	*/
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public ResponseEntity<ValidationError> validation(MethodArgumentNotValidException e, HttpServletRequest request){
 		HttpStatus status = HttpStatus.BAD_REQUEST;

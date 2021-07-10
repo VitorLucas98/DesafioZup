@@ -13,7 +13,9 @@ import org.hibernate.validator.constraints.br.CPF;
 
 import vitorlucas.desafiozup.entities.Endereco;
 import vitorlucas.desafiozup.entities.Usuario;
+import vitorlucas.desafiozup.service.validation.UsuarioValido;
 
+@UsuarioValido
 public class UsuarioDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
